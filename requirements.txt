@@ -1,0 +1,13 @@
+akshare>=1.9.6
+backtrader>=1.9.76.123
+matplotlib>=3.5.0
+pandas>=1.4.0
+numpy>=1.22.0
+seaborn>=0.11.2
+jupyter>=1.0.0
+jupyterlab>=3.4.0
+pytest>=7.0.0
+statsmodels>=0.13.0
+scipy>=1.7.3
+plotly>=5.6.0
+kaleido>=0.2.1  # For saving plotly figures
