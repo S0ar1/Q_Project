@@ -1,0 +1,9 @@
+# 只写「直接依赖」，不写版本号
+pandas>=1.5.0
+numpy>=1.21.0
+yfinance>=0.2.0
+PyYAML>=6.0
+matplotlib>=3.5.0
+pytest>=7.0.0
+akshare>=1.9.0              # ← 新增
+pandas-stubs>=1.5.0.230627   # ← 让 mypy 识别 akshare 返回类型
