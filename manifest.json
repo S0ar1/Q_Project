@@ -1,0 +1,28 @@
+{
+  "python_version": "3.10",
+  "max_func_lines": 30,
+  "type_check": "mypy --strict",
+  "test_cmd": "pytest tests/ --cov=quant_framework --cov-fail-under=80",
+  "allowed_deps": [
+    "pandas",
+    "numpy",
+    "yfinance",
+    "PyYAML",
+    "matplotlib",
+    "pytest",
+    "pydantic",
+    "pandas-stubs"
+  ],
+  "base_classes": [
+    "data/base_data_loader.py::BaseDataLoader",
+    "strategies/base_strategy.py::BaseStrategy",
+    "execution/base_executor.py::BaseExecutor",
+    "risk_management/base_risk_manager.py::BaseRiskManager"
+  ],
+  "scaffold_templates": {
+    "strategy": "strategies/{{name}}.py",
+    "data_loader": "data/{{name}}.py",
+    "risk_manager": "risk_management/{{name}}.py",
+    "executor": "execution/{{name}}.py"
+  }
+}

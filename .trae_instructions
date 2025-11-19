@@ -1,0 +1,6 @@
+# 高频指令，/i 触发
+/i rules   head -50 AI_RULES.md
+/i new     python scripts/scaffold.py $1
+/i lint    mypy . && radon cc --max 30 . && pytest
+/i dep     python scripts/check_dep.py $1
+/i plot    python scripts/plot_template.py $1

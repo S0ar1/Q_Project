@@ -1,13 +1,33 @@
-akshare>=1.9.6
-backtrader>=1.9.76.123
+# Quant-Framework 核心依赖
+# 更新日期: 2024-12-19
+
+# 数据处理
+pandas>=1.5.0
+numpy>=1.21.0
+
+# 数据获取
+yfinance>=0.2.0
+
+# 配置管理
+PyYAML>=6.0
+
+# 数据验证
+pydantic>=1.10.0
+
+# 可视化
 matplotlib>=3.5.0
-pandas>=1.4.0
-numpy>=1.22.0
-seaborn>=0.11.2
-jupyter>=1.0.0
-jupyterlab>=3.4.0
+
+# 测试框架
 pytest>=7.0.0
-statsmodels>=0.13.0
-scipy>=1.7.3
-plotly>=5.6.0
-kaleido>=0.2.1  # For saving plotly figures
+pytest-cov>=4.0.0
+
+# 类型检查
+mypy>=1.0.0
+pandas-stubs>=1.5.0
+
+# 代码格式化
+black>=22.0.0
+isort>=5.10.0
+
+# 依赖管理
+pip-tools>=6.8.0

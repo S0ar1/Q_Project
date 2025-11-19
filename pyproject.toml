@@ -1,0 +1,169 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quant-framework"
+version = "1.0.0"
+description = "量化交易框架 - 专业的算法交易开发平台"
+authors = [
+    {name = "Quant-Framework Team", email = "team@quant-framework.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+readme = "README.md"
+keywords = ["quantitative", "trading", "framework", "finance", "algorithm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+
+dependencies = [
+    "pandas>=1.5.0",
+    "numpy>=1.21.0",
+    "yfinance>=0.2.0",
+    "PyYAML>=6.0",
+    "matplotlib>=3.5.0",
+    "pydantic>=1.10.0",
+    "pandas-stubs>=1.5.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "mypy>=1.0.0",
+    "black>=22.0.0",
+    "isort>=5.10.0",
+    "pip-tools>=6.8.0",
+    "radon>=6.0.0"
+]
+
+[project.scripts]
+quant-framework = "src.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/quant-framework/quant-framework"
+Documentation = "https://quant-framework.readthedocs.io"
+Repository = "https://github.com/quant-framework/quant-framework.git"
+"Bug Tracker" = "https://github.com/quant-framework/quant-framework/issues"
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+
+[tool.setuptools.package-dir]
+"src" = "src"
+
+# Black 配置
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+# isort 配置
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 88
+src_paths = ["src", "tests", "scripts"]
+
+# MyPy 配置
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = "yfinance.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "matplotlib.*"
+ignore_missing_imports = true
+
+# pytest 配置
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests"
+]
+
+# Coverage 配置
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/.*",
+    "setup.py"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod"
+]
+fail_under = 80
+show_missing = true
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+# Radon 配置
+[tool.radon.cc]
+max = 30
+exclude = ["*/tests/*", "*/test_*"]
+show_missing = true
+
+[tool.radon.mi]
+min = 80
