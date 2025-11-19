@@ -25,11 +25,11 @@ jobs:
         # 安装额外的依赖用于运行和部署
         pip install jupyter nbconvert
     
-    - name: 运行回测
-      run: |
-        python main.py
-        # 确保results目录存在
-        mkdir -p results
+    # - name: 运行回测
+    #   run: |
+    #     python main.py
+    #     # 确保results目录存在
+    #     mkdir -p results
     
     - name: 生成绩效报告
       run: |
