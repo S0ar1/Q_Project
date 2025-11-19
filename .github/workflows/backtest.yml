@@ -46,7 +46,7 @@ jobs:
         allow_empty_commit: false
         
     - name: 上传回测结果作为 artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: backtest-results
         path: results/

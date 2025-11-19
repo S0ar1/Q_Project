@@ -12,7 +12,6 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
-readme = "README.md"
 keywords = ["quantitative", "trading", "framework", "finance", "algorithm"]
 classifiers = [
     "Development Status :: 4 - Beta",
