@@ -83,7 +83,7 @@ class BaseDataLoader(ABC):
         if not isinstance(df.index, pd.DatetimeIndex):
             raise ValueError("DataFrame必须包含timestamp索引")
         
-        required_columns = ['open', 'high', 'low', 'close', 'volume']
+        required_columns = ['Open', 'High', 'Low', 'Close', 'Volume']
         missing_columns = [col for col in required_columns if col not in df.columns]
         
         if missing_columns:
@@ -101,7 +101,7 @@ class BaseDataLoader(ABC):
             预处理后的DataFrame
         """
         # 确保数据类型正确
-        numeric_columns = ['open', 'high', 'low', 'close', 'volume']
+        numeric_columns = ['Open', 'High', 'Low', 'Close', 'Volume']
         for col in numeric_columns:
             if col in df.columns:
                 df[col] = pd.to_numeric(df[col], errors='coerce')
