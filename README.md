@@ -26,6 +26,19 @@ Quant-Framework 是一个专业的量化交易框架，专注于算法交易策�
 pip install -e .[dev]
 ```
 
+或者直接安装 requirements.txt 中的依赖：
+
+```bash
+pip install -r requirements.txt
+```
+
+### 依赖说明
+
+- **核心依赖**: pandas, numpy, PyYAML, pydantic
+- **数据获取**: yfinance, akshare (新增)
+- **可视化**: matplotlib
+- **开发工具**: pytest, mypy, black, isort
+
 ### 运行测试
 
 ```bash
@@ -53,7 +66,8 @@ Q_Project/
 │   ├── __init__.py
 │   ├── data/              # 数据管理模块
 │   │   ├── __init__.py
-│   │   └── base_data_loader.py
+│   │   ├── base_data_loader.py
+│   │   └── akshare_data_loader.py
 │   ├── strategies/        # 策略模块
 │   │   ├── __init__.py
 │   │   └── base_strategy.py
@@ -87,6 +101,30 @@ Q_Project/
 - 抽象基类定义数据获取接口
 - 支持多种数据源
 - 数据验证和预处理
+
+#### AkShare 数据加载器 (AkShareDataLoader)
+- 基于 AkShare 库实现的A股数据获取
+- 支持获取日K线 OHLCV 数据
+- 提供标准格式的数据输出
+- 内置常用股票代码列表
+
+```python
+from quant_framework.data import AkShareDataLoader
+from datetime import datetime
+
+# 创建 AkShare 数据加载器实例
+data_loader = AkShareDataLoader()
+
+# 获取股票数据
+data = data_loader.load_data(
+    symbol="600519",  # 贵州茅台
+    start_date=datetime(2023, 1, 1),
+    end_date=datetime(2023, 12, 31)
+)
+
+# 获取可用股票代码列表
+symbols = data_loader.get_available_symbols()
+```
 
 ### 策略引擎 (BaseStrategy)
 - 策略基础架构
