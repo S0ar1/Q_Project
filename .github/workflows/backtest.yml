@@ -9,6 +9,8 @@ on:
 jobs:
   backtest:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
     - uses: actions/checkout@v3
@@ -37,7 +39,7 @@ jobs:
         echo "绩效报告生成完成"
     
     - name: 部署到GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./results
