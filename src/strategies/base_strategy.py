@@ -24,7 +24,6 @@ class BaseStrategy(ABC):
         """
         self.config = config
         self._validate_config()
-        self._position = 0  # 当前持仓
 
     @abstractmethod
     def _validate_config(self) -> None:
@@ -54,20 +53,22 @@ class BaseStrategy(ABC):
     def calculate_position_size(
         self, 
         signal: float, 
-        capital: float, 
         current_price: float
     ) -> float:
-        """计算仓位大小
+        """计算仓位大小建议
+        
+        根据交易信号和当前价格给出标准化的仓位大小建议，不考虑可用资金因素。
         
         Args:
             signal: 交易信号 (-1, 0, 1)
-            capital: 可用资金
             current_price: 当前价格
             
         Returns:
-            仓位大小
+            标准化的仓位大小建议（可以是百分比或相对值）
         """
-        pass
+        # 基类提供默认实现：直接返回信号的绝对值作为仓位比例
+        # 实际策略可以重写此方法以提供更复杂的仓位计算逻辑
+        return abs(signal)
 
     def validate_signals(self, signals: pd.DataFrame) -> bool:
         """验证信号DataFrame是否符合规范
@@ -87,7 +88,7 @@ class BaseStrategy(ABC):
         if not isinstance(signals.index, pd.DatetimeIndex):
             raise ValueError("信号DataFrame必须包含timestamp索引")
         
-        required_columns = ['signal', 'position']
+        required_columns = ['signal']
         missing_columns = [col for col in required_columns if col not in signals.columns]
         
         if missing_columns:
@@ -131,6 +132,5 @@ class BaseStrategy(ABC):
         """
         return {
             'name': self.__class__.__name__,
-            'config': self.config,
-            'current_position': self._position
+            'config': self.config
         }
